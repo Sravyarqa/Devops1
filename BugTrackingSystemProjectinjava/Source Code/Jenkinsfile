@@ -1,0 +1,54 @@
+node {
+
+
+    try {
+
+       stage('Checkout'){
+
+          checkout scm
+       }
+
+       stage('Test'){
+
+         env.NODE_ENV = "test"
+
+         print "Environment will be : ${env.NODE_ENV}"
+
+       }
+
+       stage('Deploy'){
+
+         echo 'Push to Repo'
+
+         echo 'ssh to web server and tell it to pull new image'
+
+       }
+
+       stage('Cleanup'){
+
+         echo 'prune and cleanup'
+
+         mail body: 'project build successful',
+                     from: 'sravyarqa@gmail.com',
+                     replyTo: 'sravyarqa@gmail.com',
+                     subject: 'project build successful',
+                     to: 'testingrqa12@gmail.com'
+       }
+
+
+
+    }
+    catch (err) {
+
+        currentBuild.result = "FAILURE"
+
+            mail body: "project build error is here: ${env.BUILD_URL}" ,
+					 from: 'sravyarqa@gmail.com',
+                     replyTo: 'sravyarqa@gmail.com',
+                     subject: 'project build successful',
+                     to: 'testingrqa12@gmail.com'
+
+        throw err
+    }
+
+}
