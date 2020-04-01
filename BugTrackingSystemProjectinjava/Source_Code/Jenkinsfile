@@ -1,21 +1,24 @@
-pipeline {
-    agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+node {
+
+
+       stage('Checkout'){
+
+         echo 'checkout'
+       }
+
+       stage('Test'){
+	   
+		 echo 'test'
+		 
+       }
+
+       stage('Deploy'){
+
+         echo 'Push to Repo'
+
+         echo 'ssh to web server and tell it to pull new image'
+
+       } 
+
 }
