@@ -1,25 +1,21 @@
-node {
+pipeline {
+    agent any
 
-
-       stage('Checkout'){
-
-          checkout scm
-       }
-
-       stage('Test'){
-
-         env.NODE_ENV = "test"
-
-         print "Environment will be : ${env.NODE_ENV}"
-
-       }
-
-       stage('Deploy'){
-
-         echo 'Push to Repo'
-
-         echo 'ssh to web server and tell it to pull new image'
-
-       } 
-
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
 }
